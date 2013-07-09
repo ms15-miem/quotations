@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 
     QxtGlobalShortcut shortcut;
     QObject::connect(&shortcut, SIGNAL(activated()), &a, SLOT(hotkeyPressed()));
-    shortcut.setShortcut(QKeySequence("Ctrl+Shift+F12"));
+    shortcut.setShortcut(QKeySequence("Ctrl+C+Q"));
 
     return a.exec();
 }
