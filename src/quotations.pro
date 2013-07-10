@@ -13,13 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    application.cpp
+    application.cpp \
+    globalselectionhandler.cpp
 
 HEADERS  += \
-    application.h
+    application.h \
+    globalselectionhandler.h
 
 FORMS    +=
 
 
  CONFIG  += qxt
  QXT     += core gui
+
+LIBS += -luser32

@@ -1,4 +1,5 @@
 #include "application.h"
+#include "mainwindow.h"
 
 #include <QxtApplication>
 #include <QxtGlobalShortcut>
