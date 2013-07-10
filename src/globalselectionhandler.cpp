@@ -3,9 +3,6 @@
 
 #ifdef Q_WS_WIN
 
-QString globalSelectionHandler::buf = "";
-bool globalSelectionHandler::waiting = false;
-
 void globalSelectionHandler::winapiGenerateKey(int key, keyActionType actionType, bool extended)
 {
     KEYBDINPUT kb;
@@ -39,11 +36,11 @@ void globalSelectionHandler::winapiGenerateKey(int key, keyActionType actionType
 }
 #endif
 
-void globalSelectionHandler::getGlobalMouseSelection()
+QString globalSelectionHandler::getGlobalMouseSelection()
 {
     if (QApplication::clipboard()->supportsSelection())
     {
-        //return QApplication::clipboard()->text(QClipboard::Selection);
+        return QApplication::clipboard()->text(QClipboard::Selection);
     }
     else
     {
@@ -73,33 +70,17 @@ void globalSelectionHandler::getGlobalMouseSelection()
         Sleep(10);
         winapiGenerateKey(VK_CONTROL, Up);
         Sleep(10);
-        /*HWND active = GetForegroundWindow();
-        SendMessage(active, WM_COPY, 0,0);
-        Sleep(100);*/
 
-        waiting = true;
 #endif
-/*
+
         //get text from clipboard
         QString txt = QApplication::clipboard()->text();
         qDebug() << "got selection: " << endl << txt << endl;
         //retrieve previous clipboard content
         QApplication::clipboard()->setText(buf);
         qDebug() << "restoring buffer" << endl;
-        return txt;*/
+        return txt;
     }
 
-    //return QString();
-}
-
-QString globalSelectionHandler::signalDelivered()
-{
-    //get text from clipboard
-    QString txt = QApplication::clipboard()->text();
-    qDebug() << "got selection: " << endl << txt << endl;
-    //retrieve previous clipboard content
-    QApplication::clipboard()->setText(buf);
-    qDebug() << "restoring buffer" << endl;
-    waiting = false;
-    return txt;
+    return QString();
 }
