@@ -13,7 +13,9 @@ signals:
     
 public slots:
     void hotkeyPressed();
-    void copyExecuted();
+
+    //case2
+    //void copyExecuted();
 };
 
 #endif // APPLICATION_H

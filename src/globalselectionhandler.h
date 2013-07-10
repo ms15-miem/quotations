@@ -13,7 +13,9 @@
 class globalSelectionHandler
 {
 public:
-    static QString getGlobalMouseSelection();
+    static void getGlobalMouseSelection();
+    static QString signalDelivered();
+    static bool waiting;
 private:
     enum keyActionType
     {
@@ -21,6 +23,7 @@ private:
         Down
     };
 #ifdef Q_WS_WIN
+    static QString buf;
     static void winapiGenerateKey(int key, keyActionType actionType, bool extended = false);
 #endif
 };

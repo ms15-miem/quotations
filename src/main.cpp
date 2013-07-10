@@ -1,8 +1,9 @@
 #include "application.h"
-#include "mainwindow.h"
 
 #include <QxtApplication>
 #include <QxtGlobalShortcut>
+#include <QApplication>
+#include <QClipboard>
 
 int main(int argc, char *argv[])
 {
@@ -11,7 +12,9 @@ int main(int argc, char *argv[])
 
     QxtGlobalShortcut shortcut;
     QObject::connect(&shortcut, SIGNAL(activated()), &a, SLOT(hotkeyPressed()));
-    shortcut.setShortcut(QKeySequence("Ctrl+C+Q"));
+    shortcut.setShortcut(QKeySequence("Alt+Q"));
+
+    QObject::connect(QApplication::clipboard(), SIGNAL(changed(QClipboard::Mode)), &a, SLOT(copyExecuted()));
 
     return a.exec();
 }

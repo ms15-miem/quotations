@@ -11,16 +11,19 @@ Application::Application(int argc, char *argv[]) :
 void Application::hotkeyPressed()
 {
     //unfortunately, this does not always work (for example, doesn't work for Notepad or Skype)
-    //QString selection =
-    globalSelectionHandler::getGlobalMouseSelection();
+    //QString selection = globalSelectionHandler::getGlobalMouseSelection();
+
+    //case 2
+    //globalSelectionHandler::getGlobalMouseSelection();
 
     //so not preserving clipboard
-    //QString selection = QApplication::clipboard()->text();
+    QString selection = QApplication::clipboard()->text();
 
-    //QMessageBox::information(0, "Quotations", selection);
+    QMessageBox::information(0, "Quotations", selection);
 }
 
-void Application::copyExecuted()
+//case 2
+/*void Application::copyExecuted()
 {
     if (globalSelectionHandler::waiting)
     {
@@ -28,4 +31,4 @@ void Application::copyExecuted()
 
     QMessageBox::information(0, "Quotations", selection);
     }
-}
+}*/
