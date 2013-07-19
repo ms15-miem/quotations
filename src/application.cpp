@@ -1,5 +1,4 @@
 #include "application.h"
-#include "globalselectionhandler.h"
 
 #include <QMessageBox>
 #include <QApplication>
