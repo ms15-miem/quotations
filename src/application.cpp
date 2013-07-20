@@ -1,8 +1,6 @@
 #include "application.h"
-#include "globalselectionhandler.h"
 
 #include <QMessageBox>
-#include <QApplication>
 #include <QClipboard>
 
 Application::Application(int argc, char *argv[]) :
