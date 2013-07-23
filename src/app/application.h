@@ -1,14 +1,20 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include <QxtApplication>
+#include <QApplication>
+#include <QDir>
 
-class Application : public QxtApplication
+class Application : public QApplication
 {
     Q_OBJECT
 public:
     explicit Application(int argc, char *argv[]);
-    
+    void loadPlugins();
+
+private:
+    void processPlugin(QObject *plugin);
+    QDir pluginsDir;
+
 signals:
     
 public slots:

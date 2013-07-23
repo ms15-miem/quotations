@@ -5,6 +5,7 @@
 int main(int argc, char *argv[])
 {
     Application a(argc, argv);
+    a.loadPlugins();
     a.setQuitOnLastWindowClosed(false);
 
     QxtGlobalShortcut shortcut;
