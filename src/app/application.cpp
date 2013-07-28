@@ -1,10 +1,12 @@
 #include "application.h"
-#include "IExamplePlugin.h"
+#include "ISecureQuotePoster.h"
 
 #include <QMessageBox>
 #include <QClipboard>
 #include <QPluginLoader>
 #include <QDebug>
+
+#include "quote.h"
 
 Application::Application(int argc, char *argv[]) :
     QApplication(argc, argv)
@@ -21,7 +23,6 @@ Application::Application(int argc, char *argv[]) :
         pluginsDir.cdUp();
     }
 #endif
-
     pluginsDir.cdUp();
     pluginsDir.cd("plugins");
 }
@@ -29,9 +30,8 @@ Application::Application(int argc, char *argv[]) :
 void Application::loadPlugins()
 {
     foreach (QObject *plugin, QPluginLoader::staticInstances()) {
-        processPlugin(plugin);
+       processPlugin(plugin);
     }
-
     foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
         QPluginLoader loader(pluginsDir.absoluteFilePath(fileName));
         QObject *plugin = loader.instance();
@@ -48,20 +48,15 @@ void Application::processPlugin(QObject *plugin)
 {
     Q_ASSERT(plugin);
 
-    IExamplePlugin *examplePlugin = qobject_cast<IExamplePlugin *>(plugin);
+    ISecureQuotePoster *examplePlugin = qobject_cast<ISecureQuotePoster *>(plugin);
     if (examplePlugin) {
-        QString text = examplePlugin->doSomething(123); // text = "123"
-        qDebug() << text;
+       examplePlugin->test();
     }
 }
 
 void Application::hotkeyPressed()
 {
-    //unfortunately, this does not work
-    //QString selection = globalSelectionHandler::getGlobalMouseSelection();
+    Quote q(QApplication::clipboard()->text());
 
-    //so not preserving clipboard
-    QString selection = QApplication::clipboard()->text();
-
-    QMessageBox::information(0, "Quotations", selection);
+    QMessageBox::information(0, "Quotations", q.getText());
 }

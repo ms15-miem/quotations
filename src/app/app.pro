@@ -13,11 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    application.cpp
+    application.cpp \
+    quote.cpp
 
 HEADERS  += \
     application.h \
-    IExamplePlugin.h
+    quote.h \
+    ISecureQuotePoster.h \
+    IAbstractQuotePoster.h
 
 FORMS    +=
 
