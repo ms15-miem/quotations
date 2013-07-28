@@ -6,7 +6,7 @@
 class Quote
 {
 public:
-    Quote(QString &quoteText);
+    Quote(const QString &quoteText);
     QString getText() const;
 private:
     QString text;

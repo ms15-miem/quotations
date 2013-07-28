@@ -4,8 +4,7 @@
 #include "../app/ISecureQuotePoster.h"
 #include "../posting/NetClient/netclient.h"
 
-class InternetPoster : public ISecureQuotePoster,
-        public NetClient
+class InternetPoster :public NetClient, public ISecureQuotePoster
 {
     Q_OBJECT
     Q_INTERFACES(ISecureQuotePoster)
@@ -19,7 +18,7 @@ public:
         StatePosting
     };
 
-    InternetPoster(QString &srv, qint16 prt, NetClient::HostIdentifierType identType = NetClient::HostName);
+    InternetPoster(const QString &srv, qint16 prt, NetClient::HostIdentifierType identType = NetClient::HostName);
 
     void setLoginData(QString &usr, QString &pass);
     State getState();
@@ -39,7 +38,7 @@ protected:
     virtual void processPostResponse(QString &response)=0;
 
 private:
-    QString                         &server;
+    const QString&                  server;
     qint16                          port;
     NetClient::HostIdentifierType   ident_type;
     State                           state;

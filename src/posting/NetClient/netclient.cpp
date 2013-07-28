@@ -12,7 +12,7 @@ NetClient::NetClient() : blockSize(0)
             SLOT(netError(QAbstractSocket::SocketError)));
 }
 
-void NetClient::~NetClient()
+NetClient::~NetClient()
 {
     delete tcpSocket;
 }
@@ -22,7 +22,7 @@ void NetClient::slotConnected()
     emit signalConnected();
 }
 
-void NetClient::connectToServer(const QString &host, qint16 port,
+void NetClient::connectToServer(const QString &hostName, qint16 port,
                                 HostIdentifierType identType)
 {
     QHostAddress address;
@@ -41,7 +41,7 @@ void NetClient::connectToServer(const QString &host, qint16 port,
     }
     else
     {
-        if (!address.setAddress(host))
+        if (!address.setAddress(hostName))
         {
             qDebug() << "Setting address failed" << endl;
             return;

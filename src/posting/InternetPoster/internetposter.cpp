@@ -2,7 +2,7 @@
 
 
 //Later there will be settings, and they will be initialized in special func
-InternetPoster::InternetPoster(QString &srv, qint16 prt, NetClient::HostIdentifierType identType)
+InternetPoster::InternetPoster(const QString &srv, qint16 prt, NetClient::HostIdentifierType identType)
     : NetClient(), server(srv), port(prt), ident_type(identType), state(StateIdle)
 {}
 
@@ -68,4 +68,4 @@ void InternetPoster::processResponse(QString &response)
     state = InternetPoster::StateIdle;
 }
 
-Q_EXPORT_PLUGIN2(ap_internetposter, InternetPoster)
+//Q_EXPORT_PLUGIN2(ap_internetposter, InternetPoster)

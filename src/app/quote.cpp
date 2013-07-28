@@ -1,6 +1,6 @@
 #include "quote.h"
 
-Quote::Quote(QString &quoteText):text(quoteText)
+Quote::Quote(const QString &quoteText):text(quoteText)
 {
 }
 
