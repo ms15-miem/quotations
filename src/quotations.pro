@@ -5,8 +5,7 @@ CONFIG += ordered
 
 # All the projects in your application are sub-projects of your solution
 SUBDIRS += plugins \
-           app \
-           posting
+           app
 
 # Use .depends to specify that a project depends on another.
 app.depends = plugins

@@ -1,8 +1,9 @@
 #ifndef INTERNETPOSTER_H
 #define INTERNETPOSTER_H
 
-#include "../app/ISecureQuotePoster.h"
-#include "../posting/NetClient/netclient.h"
+#include "ISecureQuotePoster.h"
+#include "NetClient/netclient.h"
+//#include "../posting/NetClient/netclient.h"
 
 class InternetPoster :public NetClient, public ISecureQuotePoster
 {
