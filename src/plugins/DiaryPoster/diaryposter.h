@@ -1,7 +1,7 @@
 #ifndef DIARYPOSTER_H
 #define DIARYPOSTER_H
 
-#include "../posting/InternetPoster/internetposter.h"
+#include "../InternetPoster/internetposter.h"
 #include "../app/ISecureQuotePoster.h"
 #include <QString>
 
