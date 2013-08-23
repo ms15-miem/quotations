@@ -3,7 +3,6 @@
 
 #include "ISecureQuotePoster.h"
 #include "NetClient/netclient.h"
-//#include "../posting/NetClient/netclient.h"
 
 class InternetPoster :public NetClient, public ISecureQuotePoster
 {
@@ -26,17 +25,20 @@ public:
     bool isAuthenticated();
 
     void authenticate();
-    void post(Quote &quote);
-    void processResponse(QString &response);
+    void post(const Quote &quote);
+    void processResponse(const QString &response);
 
 protected:
     void setAuthenticated(bool auth);
 
     virtual QString getAuthRequestString()=0;
-    virtual QString getPostRequestString(Quote &quote)=0;
+    virtual QString getPostRequestString(const Quote &quote)=0;
 
-    virtual void processAuthResponse(QString &response)=0;
-    virtual void processPostResponse(QString &response)=0;
+    virtual void parseResponse(const QString &response)=0;
+
+    virtual bool requestSuccessful(QString &errortext)=0;
+    virtual void processAuthResponse()=0;
+    virtual void processPostResponse()=0;
 
 private:
     const QString&                  server;

@@ -4,6 +4,8 @@
 #include "../InternetPoster/internetposter.h"
 #include "../app/ISecureQuotePoster.h"
 #include <QString>
+#include <QMap>
+#include <QTimer>
 
 class DiaryPoster : public InternetPoster
 {
@@ -18,18 +20,23 @@ protected:
     QString getAuthRequestString();
     QString getPostRequestString(Quote &quote);
 
-    void processAuthResponse(QString &response);
-    void processPostResponse(QString &response);
+    void parseResponse(const QString &response);
+
+    bool requestSuccessful(QString &errortext);
+    void processAuthResponse();
+    void processPostResponse();
 
 protected slots:
     void sidIntervalExpired();
 
 private:
     QString sid;
-    QString appkey;
+    QTimer *timer;
+    const QString appkey = "";
     //here public key
     //here private key
     QString encryptedPassword();
+    QMap parsedResponse;
 };
 
 #endif // DIARYPOSTER_H

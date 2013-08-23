@@ -38,7 +38,7 @@ void InternetPoster::authenticate()
     }
 }
 
-void InternetPoster::post(Quote &quote)
+void InternetPoster::post(const Quote &quote)
 {
     QString postRequest = getPostRequestString(quote);
     if (postRequest != "")
@@ -49,20 +49,27 @@ void InternetPoster::post(Quote &quote)
     }
 }
 
-void InternetPoster::processResponse(QString &response)
+void InternetPoster::processResponse(const QString &response)
 {
-    if (state == InternetPoster::StateAuthenticating)
+    QString error;
+    parseResponse(response);
+    if (requestSuccessful(response, error))
     {
-        processAuthResponse(response);
-    }
-    else if (state == InternetPoster::StatePosting)
-    {
-        processPostResponse(response);
+        if (state == InternetPoster::StateAuthenticating)
+        {
+            processAuthResponse(response);
+        }
+        else if (state == InternetPoster::StatePosting)
+        {
+            processPostResponse(response);
+        }
+        else
+        {
+            qDebug() << "Response to unknown request" << endl;
+        }
     }
     else
-    {
-        qDebug() << "Response to unknown request" << endl;
-    }
+        qDebug() << error << endl;
 
     disconnectFromServer();
     state = InternetPoster::StateIdle;
